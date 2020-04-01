@@ -160,7 +160,6 @@
                         <exclude>**/checkstyle.xml</exclude>
                         <exclude>**/pom.xml</exclude>
                         <exclude>src/test/resources/**</exclude>
-                        <exclude>src/main/resources/**</exclude>
                         <exclude>**/dev-support/**</exclude>
                     </excludes>
                     <mapping>
@@ -175,6 +174,40 @@
                     </execution>
                 </executions>
             </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.2.1</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <minimizeJar>true</minimizeJar>
+                            <relocations>
+                                <relocation>
+                                    <pattern>org.apache.commons.cli</pattern>
+                                    <shadedPattern>org.gradoop.examples.thirdparty.commons_cli</shadedPattern>
+                                </relocation>
+                            </relocations>
+                            <filters>
+                                <!-- Filters out signed files to avoid SecurityException when integrating a signed jar in the resulting jar. -->
+                                <filter>
+                                    <artifact>*:*</artifact>
+                                    <excludes>
+                                        <exclude>META-INF/*.SF</exclude>
+                                        <exclude>META-INF/*.DSA</exclude>
+                                        <exclude>META-INF/*.RSA</exclude>
+                                    </excludes>
+                                </filter>
+                            </filters>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
     <dependencies>
@@ -183,6 +216,7 @@
             <groupId>org.apache.flink</groupId>
             <artifactId>flink-java</artifactId>
             <version>${dep.flink.version}</version>
+            <scope>provided</scope>
         </dependency>
 
         <!-- Gradoop -->
