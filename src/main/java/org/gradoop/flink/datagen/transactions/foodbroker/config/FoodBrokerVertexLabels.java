@@ -15,10 +15,12 @@
  */
 package org.gradoop.flink.datagen.transactions.foodbroker.config;
 
+import java.io.Serializable;
+
 /**
  * Vertex labels used by the FoodBroker data generator
  */
-public class FoodBrokerVertexLabels {
+public class FoodBrokerVertexLabels implements Serializable {
   /**
    * Vertex label.
    */

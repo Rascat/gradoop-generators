@@ -15,10 +15,12 @@
  */
 package org.gradoop.flink.datagen.transactions.foodbroker.config;
 
+import java.io.Serializable;
+
 /**
  * Acronyms names used by the FoodBroker data generator
  */
-public class FoodBrokerAcronyms {
+public class FoodBrokerAcronyms implements Serializable {
   /**
    * Acronym for erp process.
    */
