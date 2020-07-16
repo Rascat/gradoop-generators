@@ -224,6 +224,12 @@
             <version>${dep.flink.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.apache.flink</groupId>
+            <artifactId>flink-clients_2.12</artifactId>
+            <version>${dep.flink.version}</version>
+        </dependency>
+
         <!-- Gradoop -->
         <dependency>
             <groupId>org.gradoop</groupId>
